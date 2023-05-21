@@ -1,4 +1,3 @@
-let hand = 0
 input.onButtonPressed(Button.A, function () {
     basic.showString("GAME1")
     hand = randint(0, 3)
@@ -32,15 +31,22 @@ input.onButtonPressed(Button.A, function () {
     music.startMelody(music.builtInMelody(Melodies.PowerDown), MelodyOptions.Once)
     basic.clearScreen()
 })
+let angle = 0
+let hand = 0
+let open = 95
+let closed = 175
 basic.forever(function () {
-    music.playSoundEffect(music.createSoundEffect(
-    WaveShape.Sawtooth,
-    input.acceleration(Dimension.X),
-    input.compassHeading(),
+    let lichtniveau = 0
+    led.plotBarGraph(
+    lichtniveau,
+    0
+    )
+    angle = pins.map(
+    lichtniveau,
     0,
     255,
-    375,
-    SoundExpressionEffect.None,
-    InterpolationCurve.Curve
-    ), SoundExpressionPlayMode.UntilDone)
+    open,
+    closed
+    )
+    pins.servoWritePin(AnalogPin.P0, angle)
 })
